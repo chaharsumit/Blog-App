@@ -1,0 +1,162 @@
+import React from 'react';
+import {format} from 'date-fns';
+import {Link} from 'react-router-dom';
+
+export default class Articles extends React.Component{
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    return (
+      <section className="articles-container">
+        <div className="container flex">
+          <ul className='feed-menu flex'>
+            <li className='feed-status active-feed'>Global Feed</li>
+            <li className='feed-status'>Tag</li>
+          </ul>
+          {
+            this.props.articles.map(article => (
+              <article key={article.slug} className="article-card flex">
+                <div className="user-info flex">
+                  <img src={article.author.image} className='user-icon' />
+                  <div className='article-creation-info'>
+                    <h6 className='text-sm text-primary'>{article.author.username}</h6>
+                    <time className='text-xsm text-secondary'>{new Intl.DateTimeFormat('en-GB', { 
+                      weekday: 'short',
+                      month: 'short', 
+                      day: '2-digit',
+                      year: 'numeric', 
+                      }).format(new Date(article.createdAt))}
+                    </time>
+                  </div>
+                </div>
+                <div className="article-info">
+                  <h3 className='text-md text-bold text-primary'>{article.title}</h3>
+                  <p className='text-sm text-secondary'>{article.description}</p>
+                </div>
+                <div className="read-info flex">
+                  <Link to={`/article/${article.slug}`} style={{textDecoration: 'none'}}>
+                    <a className='text-xsm text-secondary read-link'>Read More...</a>
+                  </Link>
+                  <ul className='article-card-tag-list flex'>
+                    {
+                      article.tagList.map(tag => (
+                        <li key={tag} className='text-xsm text-secondary tag-item'>{tag}</li>
+                      ))
+                    }
+                  </ul>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+    )
+  }  
+}
+
+
+/*
+
+<article className="article-card flex">
+  <div className="user-info flex">
+    <img src='logo192.png' className='user-icon' />
+    <div className='article-creation-info'>
+      <h6 className='text-sm text-primary'>Gerome</h6>
+      <time className='text-xsm text-secondary'>Wed Nov 24 2021</time>
+    </div>
+  </div>
+  <div className="article-info">
+    <h3 className='text-md text-bold text-primary'>Create a new Implementation</h3>
+    <p className='text-sm text-secondary'>lorem ipsum dolor sit amet consectetur dolor amet.</p>
+  </div>
+  <div className="read-info flex">
+    <a className='text-xsm text-secondary read-link'>Read More...</a>
+    <ul className='article-card-tag-list flex'>
+      <li className='text-xsm text-secondary tag-item'>tag</li>
+      <li className='text-xsm text-secondary tag-item'>tag</li>
+    </ul>
+  </div>
+</article>
+<article className="article-card flex">
+  <div className="user-info flex">
+    <img src='logo192.png' className='user-icon' />
+    <div className='article-creation-info'>
+      <h6 className='text-sm text-primary'>Gerome</h6>
+      <time className='text-xsm text-secondary'>Wed Nov 24 2021</time>
+    </div>
+  </div>
+  <div className="article-info">
+    <h3 className='text-md text-bold text-primary'>Create a new Implementation</h3>
+    <p className='text-sm text-secondary'>lorem ipsum dolor sit amet consectetur dolor amet.</p>
+  </div>
+  <div className="read-info flex">
+    <a className='text-xsm text-secondary read-link'>Read More...</a>
+    <ul className='article-card-tag-list flex'>
+      <li className='text-xsm text-secondary tag-item'>tag</li>
+      <li className='text-xsm text-secondary tag-item'>tag</li>
+    </ul>
+  </div>
+</article>
+<article className="article-card flex">
+  <div className="user-info flex">
+    <img src='logo192.png' className='user-icon' />
+    <div className='article-creation-info'>
+      <h6 className='text-sm text-primary'>Gerome</h6>
+      <time className='text-xsm text-secondary'>Wed Nov 24 2021</time>
+    </div>
+  </div>
+  <div className="article-info">
+    <h3 className='text-md text-bold text-primary'>Create a new Implementation</h3>
+    <p className='text-sm text-secondary'>lorem ipsum dolor sit amet consectetur dolor amet.</p>
+  </div>
+  <div className="read-info flex">
+    <a className='text-xsm text-secondary read-link'>Read More...</a>
+    <ul className='article-card-tag-list flex'>
+      <li className='text-xsm text-secondary tag-item'>tag</li>
+      <li className='text-xsm text-secondary tag-item'>tag</li>
+    </ul>
+  </div>
+</article><article className="article-card flex">
+  <div className="user-info flex">
+    <img src='logo192.png' className='user-icon' />
+    <div className='article-creation-info'>
+      <h6 className='text-sm text-primary'>Gerome</h6>
+      <time className='text-xsm text-secondary'>Wed Nov 24 2021</time>
+    </div>
+  </div>
+  <div className="article-info">
+    <h3 className='text-md text-bold text-primary'>Create a new Implementation</h3>
+    <p className='text-sm text-secondary'>lorem ipsum dolor sit amet consectetur dolor amet.</p>
+  </div>
+  <div className="read-info flex">
+    <a className='text-xsm text-secondary read-link'>Read More...</a>
+    <ul className='article-card-tag-list flex'>
+      <li className='text-xsm text-secondary tag-item'>tag</li>
+      <li className='text-xsm text-secondary tag-item'>tag</li>
+    </ul>
+  </div>
+</article>
+<article className="article-card flex">
+  <div className="user-info flex">
+    <img src='logo192.png' className='user-icon' />
+    <div className='article-creation-info'>
+      <h6 className='text-sm text-primary'>Gerome</h6>
+      <time className='text-xsm text-secondary'>Wed Nov 24 2021</time>
+    </div>
+  </div>
+  <div className="article-info">
+    <h3 className='text-md text-bold text-primary'>Create a new Implementation</h3>
+    <p className='text-sm text-secondary'>lorem ipsum dolor sit amet consectetur dolor amet.</p>
+  </div>
+  <div className="read-info flex">
+    <a className='text-xsm text-secondary read-link'>Read More...</a>
+    <ul className='article-card-tag-list flex'>
+      <li className='text-xsm text-secondary tag-item'>tag</li>
+      <li className='text-xsm text-secondary tag-item'>tag</li>
+    </ul>
+  </div>
+</article>
+
+*/

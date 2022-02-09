@@ -1,0 +1,390 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+  v2.0 | 20110126
+  License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1.5;
+  font-family: 'Roboto', sans-serif;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.flex{
+  display: flex;
+}
+.container{
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+.header{
+  padding: 1rem 0;
+  align-items: center;
+}
+.align-left{
+  text-align: left;
+}
+
+
+/* Text Styles */
+
+.text-xlg{
+  font-size: 3rem;
+}
+
+.text-lg{
+  font-size: 2rem;
+}
+
+.text-md{
+  font-size: 1.5rem;
+}
+
+.text-sm{
+  font-size: 1rem;
+}
+
+.text-xsm{
+  font-size: 0.8rem;
+}
+
+.text-secondary{
+  color: #a7a4a4;
+}
+
+.text-primary{
+  color: rgb(228, 101, 101);
+}
+
+.text-light{
+  color: #ffffff;
+}
+
+.text-tertiary{
+  color: #310101;
+}
+
+.text-bold{
+  font-weight: 900;
+}
+
+/* Text Styles */
+
+
+
+/* Navbar styles */
+
+.logo{
+  font-size: 2rem;
+  font-weight: 900;
+  color: rgb(228, 101, 101);
+}
+.navbar{
+  margin-left: auto;
+}
+.nav-menu{
+  gap: 1.5rem;
+}
+.nav-item{
+  padding: 1rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.nav-item:hover{
+  color:rgb(228, 101, 101);
+  cursor: pointer;
+}
+.active-nav-item{
+  color:rgb(228, 101, 101);
+}
+.nav-item-navlink{
+  text-decoration: none;
+  color: black;
+}
+
+/* Navbar styles */
+
+/* Hero styles */
+
+.hero{
+  text-align: center;
+  background-color: rgb(228, 101, 101);
+  padding: 3rem 0;
+  color: white;
+}
+
+/* Hero styles */
+
+/* Main Wrapper Styles */
+
+.main-wrapper{
+  justify-content: space-between;
+  padding: 2rem 0;
+}
+
+/* Main Wrapper Styles */
+
+/* Articles feed menu */
+
+.feed-menu{
+  column-gap: 1rem;
+  border-bottom: 1px solid #a7a4a4;
+  padding: 0.5rem;
+}
+
+.active-feed{
+  color: rgb(228, 101, 101);
+  font-weight: 900;
+}
+
+/* Articles feed menu */
+
+/* Articles card styles */
+
+.articles-container{
+  flex: 0 1 70%;
+  padding-bottom: 5rem;
+}
+.articles-container .container{
+  flex-direction: column;
+  row-gap: 1rem;
+}
+.article-card{
+  flex-direction: column;
+  row-gap: 0.5rem;
+  border-bottom: 1px solid #a7a4a4;
+  padding: 1rem 0;
+}
+.user-info{
+  column-gap: 0.5rem;
+  align-items: center;
+}
+.user-icon{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.user-icon-sm{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+.read-info{
+  align-items: center;
+}
+.article-card-tag-list{
+  column-gap: 0.2rem;
+  margin-left: auto;
+}
+.tag-item{
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #a7a4a4;
+  border-radius: 1rem;
+}
+.read-link:hover{
+  color: rgb(228, 101, 101);
+  cursor: pointer;
+}
+
+/* Articles card styles */
+
+/* Tags container styles */
+
+.tags-container{
+  padding: 1rem 0.5rem;
+  flex: 0 1 20%;
+  background-color: rgb(228, 101, 101);
+  border-radius: 1rem;
+  height: fit-content;
+}
+.tags-menu{
+  gap: 0.5rem 1rem;
+  flex-wrap: wrap;
+  color: white;
+}
+.tags-menu-item{
+  padding: 0.5rem 1rem;
+  border: 1px solid white;
+  border-radius: 2rem;
+}
+
+/* Tags container styles */
+
+/* Footer styles */
+
+.footer{
+  text-align: center;
+  padding: 1rem;
+  background-color: rgb(228, 101, 101);
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Footer styles */
+
+/* form styles */
+
+.form-container{
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+.form{
+  flex-direction: column;
+  gap: 1rem;
+  width: 50%;
+}
+.form-control{
+  padding: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #a7a4a4;
+  font-size: 1.2rem;
+}
+input::placeholder{
+  font-size: 1.2rem;
+}
+.submit-btn{
+  background-color: rgb(228, 101, 101);
+  width: fit-content;
+  align-self: flex-end;
+  border: none;
+  color: white;
+}
+
+/* form styles */
+
+/* Article body styles */
+
+.article-body{
+  padding: 2rem 0;
+}
+
+.article-body .container{
+  flex-direction: column;
+  border-bottom: 1px solid #a7a4a4;
+  padding-bottom: 2rem;
+  row-gap: 2rem;
+  align-items: flex-start;
+}
+
+/* Article body styles */
+
+/* Comment styles */
+
+.comment-section .container{
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 1rem;
+  align-items: center;
+}
+.comment-cards-list{
+  flex-direction: column;
+  row-gap: 1rem;
+  width: 50%;
+}
+.comment-card{
+  border-radius: 0.5rem;
+}
+.comment-description{
+  border: 1px solid #a7a4a4;
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding: 1rem;
+}
+.comment-author-info{
+  border-radius: 0 0 0.5rem 0.5rem;
+  column-gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: rgb(228, 101, 101);
+}
+
+
+/* Comment styles */
+
+
+/* Loader CSS */
+
+
+.loader-container{
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 10px solid red;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}
+
+
+/* Loader CSS */
