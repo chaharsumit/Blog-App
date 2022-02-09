@@ -1,5 +1,5 @@
 import React from 'react';
-import {format} from 'date-fns';
+import {format, getDate} from 'date-fns';
 import {Link} from 'react-router-dom';
 
 export default class Articles extends React.Component{
@@ -22,12 +22,9 @@ export default class Articles extends React.Component{
                   <img src={article.author.image} className='user-icon' />
                   <div className='article-creation-info'>
                     <h6 className='text-sm text-primary'>{article.author.username}</h6>
-                    <time className='text-xsm text-secondary'>{new Intl.DateTimeFormat('en-GB', { 
-                      weekday: 'short',
-                      month: 'short', 
-                      day: '2-digit',
-                      year: 'numeric', 
-                      }).format(new Date(article.createdAt))}
+                    <time className='text-xsm text-secondary'>{
+                      this.props.getDate(article.createdAt)
+                    }
                     </time>
                   </div>
                 </div>
@@ -36,8 +33,8 @@ export default class Articles extends React.Component{
                   <p className='text-sm text-secondary'>{article.description}</p>
                 </div>
                 <div className="read-info flex">
-                  <Link to={`/article/${article.slug}`} style={{textDecoration: 'none'}}>
-                    <a className='text-xsm text-secondary read-link'>Read More...</a>
+                  <Link to={`/articles/${article.slug}`} style={{textDecoration: 'none'}}>
+                    <p className='text-xsm text-secondary read-link'>Read More...</p>
                   </Link>
                   <ul className='article-card-tag-list flex'>
                     {

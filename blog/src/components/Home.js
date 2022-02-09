@@ -13,7 +13,7 @@ export default class Home extends React.Component{
       <>
         <Hero />
         <div className='main-wrapper container flex'>
-          <Articles articles={this.props.articles} />
+          <Articles articles={this.props.articles} getDate={this.props.getDate} />
           <Aside articles={this.props.articles} />
         </div>
       </>

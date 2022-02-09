@@ -1,18 +1,16 @@
-export default function ArticleHero(){
+export default function ArticleHero(props){
+  let article = props.article.article;
   return (
     <section className="hero">
       <div className="container">
-        <h1 className="text-xlg align-left">This is my new article</h1>
+        <h1 className="text-xlg align-left">{article.article.title}</h1>
         <div className="user-info flex">
-          <img src='logo512.png' className='user-icon' />
+          <img src={article.article.author.image} className='user-icon' />
           <div className='article-creation-info'>
-            <h6 className='text-sm text-light align-left'>Gerome</h6>
-            <time className='text-xsm text-light'>{new Intl.DateTimeFormat('en-GB', { 
-              weekday: 'short',
-              month: 'short', 
-              day: '2-digit',
-              year: 'numeric', 
-              }).format(new Date())}
+            <h6 className='text-sm text-light align-left'>{article.article.author.username}</h6>
+            <time className='text-xsm text-light'>{
+              props.getDate(article.article.createdAt)
+            }
             </time>
           </div>
         </div>

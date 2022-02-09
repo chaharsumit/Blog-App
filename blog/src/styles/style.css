@@ -103,6 +103,10 @@ table {
   color: #310101;
 }
 
+.text-danger{
+  color: orangered;
+}
+
 .text-bold{
   font-weight: 900;
 }

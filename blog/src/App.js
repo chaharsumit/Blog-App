@@ -24,6 +24,15 @@ export default class App extends React.Component{
     }));
   }
 
+  getDate = (date) => {
+    return new Intl.DateTimeFormat('en-GB', { 
+      weekday: 'short',
+      month: 'short', 
+      day: '2-digit',
+      year: 'numeric', 
+      }).format(new Date(date))
+  }
+
   render(){
     if(!this.state.articles){
       return (
@@ -36,10 +45,10 @@ export default class App extends React.Component{
           <BrowserRouter>
             <Header />
             <Routes>
-              <Route path='/' element={<Home articles={this.state.articles} />}/>
+              <Route path='/' element={<Home articles={this.state.articles} getDate={this.getDate} />}/>
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
-              <Route path='/article/:slug' element={<SingleArticle />} />
+              <Route path='/articles/:slug' element={<SingleArticle baseUrl={baseUrl} getDate={this.getDate} />} />
             </Routes>
             <Footer />
           </BrowserRouter>

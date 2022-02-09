@@ -1,12 +1,13 @@
-export default function ArticleBody(){
+export default function ArticleBody(props){
+  let article = props.article.article.article;
   return (
     <section className="article-body align-left">
       <div className="container flex">
-        <p className="text-tertiary">Share your knowledge and enpower the community by creating a new implementation</p>
+        <p className="text-tertiary text-md">{article.body}</p>
         <ul className='article-card-tag-list flex'>
-          <li className='text-xsm text-secondary tag-item'>tag_one</li>
-          <li className='text-xsm text-secondary tag-item'>tag_two</li>
-          <li className='text-xsm text-secondary tag-item'>tag_three</li>
+          {
+            article.tagList.map(tag => <li className='text-xsm text-secondary tag-item'>{tag}</li>)
+          }
         </ul>
       </div>
     </section>
