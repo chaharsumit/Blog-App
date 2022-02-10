@@ -353,17 +353,23 @@ input::placeholder{
   padding-bottom: 2rem;
 }
 .pagination .container{
+  flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
   justify-content: center;
 }
 .pagination-menu{
   gap: 1rem 0.2rem;
+  flex-wrap: wrap;
 }
 .pagination-menu-item{
   border: 1px solid rgb(228, 101, 101);
   padding: 0.5rem 1rem;
   border-radius: 0.2rem;
+}
+.active-page-menu-item{
+  background-color: rgb(228, 101, 101);
+  color: white;
 }
 
 /* Pagination styles */

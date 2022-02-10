@@ -3,32 +3,33 @@ import React from 'react';
 export default class Pagination extends React.Component{
   constructor(props){
     super(props);
+    this.state = {
+      pageArr: null,
+    }
   }
 
   render(){
+    let totalArticles = this.props.articlesCount;
+    let noOfPages = Math.ceil(totalArticles / 10);
+    let i = 1;
+    let arr = [];
+    while(i <= noOfPages){
+      arr.push(i);
+      i++;
+    }
+    this.state.pageArr = arr;
     return (
       <section className='pagination'>
         <div className='container flex'>
-          <p>≪Prev</p>
+          <p onClick={this.props.handlePagination}>Prev</p>
           <ul className='pagination-menu flex'>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
-            <li className='pagination-menu-item'>1</li>
+            {
+              this.state.pageArr.map(page => (
+                <li onClick={this.props.handlePagination} className={this.props.activePageIndex != page ? 'pagination-menu-item' : 'pagination-menu-item active-page-menu-item'}>{page}</li>
+              ))
+            }
           </ul>
-          <p>Next≫</p>
+          <p onClick={this.props.handlePagination}>Next</p>
         </div>
       </section>
     )
