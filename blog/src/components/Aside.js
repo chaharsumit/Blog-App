@@ -21,7 +21,7 @@ export default class Aside extends React.Component{
         <ul className="tags-menu flex">
           {
             tagList.map(tag => (
-              <li key={tag} className="tags-menu-item">{tag}</li>
+              <li key={tag} onClick={this.props.handleTagSelect} className="tags-menu-item">{tag}</li>
             ))
           }
         </ul>
