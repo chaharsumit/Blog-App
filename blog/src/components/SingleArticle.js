@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react';
 import Loader from './Loader';
 
 export default function SingleArticle(props){
-  console.log(props);
   const [article, setArticle] = useState(null);
   let slug = useParams().slug;
 

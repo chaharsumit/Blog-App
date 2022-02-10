@@ -186,7 +186,7 @@ table {
 
 .articles-container{
   flex: 0 1 70%;
-  padding-bottom: 5rem;
+  padding-bottom: 2rem;
 }
 .articles-container .container{
   flex-direction: column;
@@ -346,6 +346,27 @@ input::placeholder{
 
 
 /* Comment styles */
+
+/* Pagination styles */
+
+.pagination{
+  padding-bottom: 2rem;
+}
+.pagination .container{
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+.pagination-menu{
+  gap: 1rem 0.2rem;
+}
+.pagination-menu-item{
+  border: 1px solid rgb(228, 101, 101);
+  padding: 0.5rem 1rem;
+  border-radius: 0.2rem;
+}
+
+/* Pagination styles */
 
 
 /* Loader CSS */

@@ -3,6 +3,7 @@ import Hero from './Hero';
 import Articles from './Articles';
 import Aside from './Aside';
 import Loader from './Loader';
+import Pagination from './Pagination';
 
 let baseUrl = 'https://mighty-oasis-08080.herokuapp.com/api/articles';
 
@@ -14,18 +15,21 @@ export default class Home extends React.Component{
       offset: 0,
       articles: null,
       filteredArticles: null,
+      articlesCount: 0
     }
   }
 
   componentDidMount(){
-    fetch(baseUrl).then(res => res.json()).then(({articles}) => this.setState({
-      articles
+    fetch(baseUrl).then(res => res.json()).then(({articlesCount,articles}) => this.setState({
+      articles: articles,
+      articlesCount: articlesCount
     }));
   }
 
   generateUrlAndFetch = (tag) => {
-    fetch(baseUrl + '?tag=' + tag).then(res => res.json()).then(({articles}) => this.setState({
-      filteredArticles: articles
+    fetch(baseUrl + '?tag=' + tag).then(res => res.json()).then(({articlesCount,articles}) => this.setState({
+      filteredArticles: articles,
+      articlesCount: articlesCount
     }))
   }
 
@@ -61,6 +65,7 @@ export default class Home extends React.Component{
             <Articles articles={this.state.articles} clearTag={this.clearTag} selectedTag={this.state.selectedTag} filteredArticles={this.state.filteredArticles} getDate={this.props.getDate} />
             <Aside articles={this.state.articles} handleTagSelect={this.handleTagSelect} />
           </div>
+          <Pagination />
         </>
       )
     }

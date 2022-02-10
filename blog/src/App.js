@@ -35,7 +35,6 @@ export default class App extends React.Component{
             <Route path='/register' element={<Register />} />
             <Route path='/articles/:slug' element={<SingleArticle baseUrl={baseUrl} getDate={this.getDate} />} />
           </Routes>
-          <Footer />
         </BrowserRouter>
       </>
     )

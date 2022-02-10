@@ -1,4 +1,5 @@
 export default function ArticleBody(props){
+  console.log(props);
   let article = props.article.article.article;
   return (
     <section className="article-body align-left">
