@@ -46,7 +46,7 @@ export default class App extends React.Component{
 
   setUser = (userData) => {
     this.setState({
-      user: userData.user
+      user: userData
     })
   }
 
@@ -59,10 +59,17 @@ export default class App extends React.Component{
     }
   }
 
+  Logout = () => {
+    localStorage.removeItem('token');
+    this.setState({
+      user: null,
+    })
+  }
+
   render(){
     return (
       <>
-        <Header isLoggedIn={this.isLoggedIn()} />
+        <Header isLoggedIn={this.isLoggedIn()} Logout={this.Logout} user={this.state.user} />
         <Routes>
           <Route path='/' element={<Home getDate={this.getDate} />}/>
             <Route path='/login' element={this.isLoggedIn() ? <Navigate to="/" replace={true} /> : <Login setUser={this.setUser} />} />

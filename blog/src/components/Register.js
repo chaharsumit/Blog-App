@@ -83,7 +83,7 @@ export default class Register extends React.Component {
       .then(res => res.json())
       .then(data => {
         setToken(data.user.token);
-        this.props.setUser(data);
+        this.props.setUser(data.user);
       });
   };
 

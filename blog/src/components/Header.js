@@ -13,6 +13,7 @@ export default class Header extends React.Component {
     let nonActiveStyle = {
       textDecoration: "none"
     };
+    let user = this.props.user;
     return (
       <header className="header">
         <div className="container flex">
@@ -27,8 +28,34 @@ export default class Header extends React.Component {
               >
                 <li className="nav-item">Home</li>
               </NavLink>
-              {this.props.isLoggedIn ? (
-                ""
+              {this.props.isLoggedIn && this.props.user ? (
+                <>
+                  <NavLink
+                      to="/"
+                      style={({ isActive }) =>
+                        isActive ? activeStyle : nonActiveStyle
+                      }
+                    >
+                      <li className="nav-item">Compose</li>
+                  </NavLink>
+                  <NavLink
+                      to="/"
+                      style={({ isActive }) =>
+                        isActive ? activeStyle : nonActiveStyle
+                      }
+                    >
+                      <li className="nav-item">Settings</li>
+                  </NavLink>
+                  <NavLink
+                      to="/"
+                      style={({ isActive }) =>
+                        isActive ? activeStyle : nonActiveStyle
+                      }
+                    >
+                      <li className="nav-item">{user.email}</li>
+                  </NavLink>
+                  <li onClick={this.props.Logout} className="nav-item">Logout</li>
+                </>
               ) : (
                 <>
                   <NavLink

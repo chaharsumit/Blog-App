@@ -1,64 +1,67 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import { LoginURL } from '../utils/constant';
-import { setToken } from '../utils/storage';
+import React from "react";
+import { Link } from "react-router-dom";
+import { LoginURL } from "../utils/constant";
+import { setToken } from "../utils/storage";
 
-export default class Login extends React.Component{
-  constructor(props){
+export default class Login extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       errors: {
-        email: '',
-        password: '',
+        email: "",
+        password: ""
       }
-    }
+    };
   }
 
-  validatePassword = (value) => {
-    let hasNum=false, hasString=false;
-    if(!value){
+  validatePassword = value => {
+    let hasNum = false,
+      hasString = false;
+    if (!value) {
       return `This field can't be empty`;
-    }else if(value.length < 6){
-      return 'Password must be more than 6 characters'
-    }else{
-      let valArr = value.split('');
+    } else if (value.length < 6) {
+      return "Password must be more than 6 characters";
+    } else {
+      let valArr = value.split("");
       valArr.forEach(val => {
-        if(!Boolean(Number(val))){
+        if (!Boolean(Number(val))) {
           hasString = true;
         }
-        if(Boolean(Number(val))){
+        if (Boolean(Number(val))) {
           hasNum = true;
         }
-      })
+      });
     }
-    return hasNum && hasString ? '' : 'Password must contain both strings and numbers';
-  }
+    return hasNum && hasString
+      ? ""
+      : "Password must contain both strings and numbers";
+  };
 
   handleChange = ({ target }) => {
     let { name, value } = target;
-    let errors = {...this.state.errors};
+    let errors = { ...this.state.errors };
 
-    switch(name){
-      case 'email':
-        errors.email = value.indexOf('@') === -1 ? 'Include @ in your email' : '';
+    switch (name) {
+      case "email":
+        errors.email =
+          value.indexOf("@") === -1 ? "Include @ in your email" : "";
         break;
-      case 'password':
+      case "password":
         errors.password = this.validatePassword(value);
       default:
         break;
     }
     this.setState({
       [name]: value,
-      errors: errors,
-    })
-  }
+      errors: errors
+    });
+  };
 
   LoginUser = () => {
     let email = this.state.email;
     let password = this.state.password;
-    let username = this.state.username;
     fetch(LoginURL, {
       method: "POST",
       headers: {
@@ -67,39 +70,65 @@ export default class Login extends React.Component{
       body: JSON.stringify({
         user: {
           email,
-          password,
+          password
         }
       })
     })
       .then(res => res.json())
       .then(data => {
         setToken(data.user.token);
-        this.props.setUser(data);
+        this.props.setUser(data.user);
       });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
     this.LoginUser();
   };
 
-  render(){
+  render() {
     return (
       <section className="form-container flex container">
-        <h1 className='text-lg'>Sign in</h1>
-        <Link to='/signup'>Need an account?</Link>
-        <form className='form flex' onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} value={this.state.email} type='email' name='email' placeholder='Email' className='form-control' />
-          {
-            this.state.errors.email ? <span className='error-message text-danger'>* {this.state.errors.email}</span> : ''
-          }
-          <input onChange={this.handleChange} value={this.state.password} type='password' name='password' placeholder='Password' className='form-control' />
-          {
-            this.state.errors.password ? <span className='error-message text-danger'>* {this.state.errors.password}</span> : ''
-          }
-          <input type='submit' value="Sign in" className='form-control submit-btn' />
+        <h1 className="text-lg">Sign in</h1>
+        <Link to="/signup">Need an account?</Link>
+        <form className="form flex" onSubmit={this.handleSubmit}>
+          <input
+            onChange={this.handleChange}
+            value={this.state.email}
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="form-control"
+          />
+          {this.state.errors.email ? (
+            <span className="error-message text-danger">
+              * {this.state.errors.email}
+            </span>
+          ) : (
+            ""
+          )}
+          <input
+            onChange={this.handleChange}
+            value={this.state.password}
+            type="password"
+            name="password"
+            placeholder="Password"
+            className="form-control"
+          />
+          {this.state.errors.password ? (
+            <span className="error-message text-danger">
+              * {this.state.errors.password}
+            </span>
+          ) : (
+            ""
+          )}
+          <input
+            type="submit"
+            value="Sign in"
+            className="form-control submit-btn"
+          />
         </form>
       </section>
-    )
-  }  
+    );
+  }
 }

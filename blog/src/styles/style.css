@@ -125,9 +125,6 @@ table {
 .navbar{
   margin-left: auto;
 }
-.nav-menu{
-  gap: 1.5rem;
-}
 .nav-item{
   padding: 1rem;
   font-weight: 700;
