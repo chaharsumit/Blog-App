@@ -87,7 +87,7 @@ export default class Register extends React.Component {
       });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.RegisterUser();
   };

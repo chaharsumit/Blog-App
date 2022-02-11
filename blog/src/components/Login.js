@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { loginURL } from '../utils/constant';
+import { LoginURL } from '../utils/constant';
+import { setToken } from '../utils/storage';
 
 export default class Login extends React.Component{
   constructor(props){
@@ -23,7 +24,6 @@ export default class Login extends React.Component{
       return 'Password must be more than 6 characters'
     }else{
       let valArr = value.split('');
-      console.log(valArr);
       valArr.forEach(val => {
         if(!Boolean(Number(val))){
           hasString = true;
@@ -55,10 +55,33 @@ export default class Login extends React.Component{
     })
   }
 
+  LoginUser = () => {
+    let email = this.state.email;
+    let password = this.state.password;
+    let username = this.state.username;
+    fetch(LoginURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        user: {
+          email,
+          password,
+        }
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        setToken(data.user.token);
+        this.props.setUser(data);
+      });
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log('for being submitted');
-  }
+    this.LoginUser();
+  };
 
   render(){
     return (
