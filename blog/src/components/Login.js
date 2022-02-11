@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { loginURL } from '../utils/constant';
 
 export default class Login extends React.Component{
   constructor(props){
@@ -9,7 +10,7 @@ export default class Login extends React.Component{
       password: '',
       errors: {
         email: '',
-        password: ''
+        password: '',
       }
     }
   }

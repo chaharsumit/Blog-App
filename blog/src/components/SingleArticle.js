@@ -29,7 +29,6 @@ export default function SingleArticle(props){
       )
     }
   }
-
   return (
     getUi()
   )

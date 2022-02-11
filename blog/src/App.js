@@ -1,17 +1,38 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './components/Home';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import Register from './components/Register';
 import SingleArticle from './components/SingleArticle';
+import {getToken} from './utils/storage';
+import { userURL } from './utils/constant';
 
 
 let baseUrl = 'https://mighty-oasis-08080.herokuapp.com/api/articles';
 export default class App extends React.Component{
   constructor(props){
     super(props);
+    this.state = {
+      user: null,
+    }
+  }
+
+  componentDidMount(){
+    if(localStorage.token){
+      this.fetchCurrentUser()
+    }
+  }
+
+  fetchCurrentUser = () => {
+    fetch(userURL, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization" : `Token ${localStorage.token}`
+      },
+    }).then(res => res.json()).then(user => this.setState({user}));
   }
 
   getDate = (date) => {
@@ -23,14 +44,29 @@ export default class App extends React.Component{
       }).format(new Date(date))
   }
 
+  setUser = (userData) => {
+    this.setState({
+      user: userData.user
+    })
+  }
+
+  isLoggedIn = () => {
+    let token = getToken();
+    if(token && this.state.user){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   render(){
     return (
       <>
-        <Header />
+        <Header isLoggedIn={this.isLoggedIn()} />
         <Routes>
           <Route path='/' element={<Home getDate={this.getDate} />}/>
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Register />} />
+            <Route path='/login' element={this.isLoggedIn() ? <Navigate to="/" replace={true} /> : <Login setUser={this.setUser} />} />
+            <Route path='/signup' element={this.isLoggedIn() ? <Navigate to="/" replace={true} /> : <Register setUser={this.setUser} />} />
           <Route path='/articles/:slug' element={<SingleArticle baseUrl={baseUrl} getDate={this.getDate} />} /> 
         </Routes>
       </>
