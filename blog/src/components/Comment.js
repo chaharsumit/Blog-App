@@ -15,14 +15,13 @@ export default function Comment(props){
     if(!comments){
       return <p>Loading Comments...</p>
     }else{
-      console.log(comments.comments.comments);
       return (
         <>
           <p>Sign up or Sign in to add comments to this article</p>
           <ul className='comment-cards-list flex'>
             {
               comments.comments.comments.map(comment => (
-                <li className='comment-card'>
+                <li key={comment.id} className='comment-card'>
                   <p className='text-xsm comment-description'>{comment.body}</p>
                   <div className='comment-author-info flex'>
                     <img src={comment.author.image} className='user-icon-sm' />

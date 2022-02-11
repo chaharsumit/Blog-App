@@ -3,33 +3,29 @@ import React from 'react';
 export default class Pagination extends React.Component{
   constructor(props){
     super(props);
-    this.state = {
-      pageArr: null,
-    }
   }
 
   render(){
     let totalArticles = this.props.articlesCount;
     let noOfPages = Math.ceil(totalArticles / 10);
     let i = 1;
-    let arr = [];
+    let pageArr = [];
     while(i <= noOfPages){
-      arr.push(i);
+      pageArr.push(i);
       i++;
     }
-    this.state.pageArr = arr;
     return (
       <section className='pagination'>
         <div className='container flex'>
-          <p onClick={this.props.handlePagination}>Prev</p>
+          <p onClick={() => this.props.handlePagination((this.props.activePageIndex - 1) < 1 ? 1 : this.props.activePageIndex - 1)}>Prev</p>
           <ul className='pagination-menu flex'>
             {
-              this.state.pageArr.map(page => (
-                <li onClick={this.props.handlePagination} className={this.props.activePageIndex != page ? 'pagination-menu-item' : 'pagination-menu-item active-page-menu-item'}>{page}</li>
+              pageArr.map(page => (
+                <li key={page} onClick={() => this.props.handlePagination(page)} className={this.props.activePageIndex != page ? 'pagination-menu-item' : 'pagination-menu-item active-page-menu-item'}>{page}</li>
               ))
             }
           </ul>
-          <p onClick={this.props.handlePagination}>Next</p>
+          <p onClick={() => this.props.handlePagination((this.props.activePageIndex + 1) > noOfPages ? this.props.activePageIndex : this.props.activePageIndex + 1)}>Next</p>
         </div>
       </section>
     )

@@ -15,7 +15,6 @@ export default function SingleArticle(props){
       article
     }));
   }, []);
-  console.log(article);
 
   function getUi(){
     if(!article){

@@ -63,7 +63,7 @@ export default class Login extends React.Component{
     return (
       <section className="form-container flex container">
         <h1 className='text-lg'>Sign in</h1>
-        <Link to='/register'>Need an account?</Link>
+        <Link to='/signup'>Need an account?</Link>
         <form className='form flex' onSubmit={this.handleSubmit}>
           <input onChange={this.handleChange} value={this.state.email} type='email' name='email' placeholder='Email' className='form-control' />
           {

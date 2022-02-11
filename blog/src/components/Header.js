@@ -29,7 +29,7 @@ export default class Header extends React.Component{
             }>
                 <li className='nav-item'>Sign in</li>
               </NavLink>
-              <NavLink to='/register' style={({ isActive }) =>
+              <NavLink to='/signup' style={({ isActive }) =>
               isActive ? activeStyle : nonActiveStyle
             }>
                 <li className='nav-item'>Sign up</li>

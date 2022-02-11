@@ -1,12 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './components/Home';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import Register from './components/Register';
 import SingleArticle from './components/SingleArticle';
-
 
 
 let baseUrl = 'https://mighty-oasis-08080.herokuapp.com/api/articles';
@@ -27,15 +26,13 @@ export default class App extends React.Component{
   render(){
     return (
       <>
-        <BrowserRouter>
-          <Header />
-          <Routes>
-            <Route path='/' element={<Home getDate={this.getDate} />}/>
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/articles/:slug' element={<SingleArticle baseUrl={baseUrl} getDate={this.getDate} />} />
-          </Routes>
-        </BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path='/' element={<Home getDate={this.getDate} />}/>
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Register />} />
+          <Route path='/articles/:slug' element={<SingleArticle baseUrl={baseUrl} getDate={this.getDate} />} /> 
+        </Routes>
       </>
     )
   }
