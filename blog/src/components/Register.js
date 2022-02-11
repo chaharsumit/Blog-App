@@ -80,14 +80,22 @@ export default class Register extends React.Component {
         }
       })
     })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(({ errors }) => {
+            return Promise.reject(errors);
+          });
+        }
+        return res.json();
+      })
       .then(data => {
         setToken(data.user.token);
         this.props.setUser(data.user);
-      });
+      })
+      .catch(errors => this.setState({ errors }));
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
     this.RegisterUser();
   };

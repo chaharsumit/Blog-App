@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { LoginURL } from "../utils/constant";
 import { setToken } from "../utils/storage";
+import { Navigate } from "react-router-dom";
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export default class Login extends React.Component {
       }
     };
   }
+
 
   validatePassword = value => {
     let hasNum = false,
@@ -74,11 +76,27 @@ export default class Login extends React.Component {
         }
       })
     })
-      .then(res => res.json())
+      .then(res => {
+        if(!res.ok){
+          return res.json().then(({errors}) => {
+            return Promise.reject(errors);
+          });
+        }
+        return res.json();
+      })
       .then(data => {
         setToken(data.user.token);
         this.props.setUser(data.user);
-      });
+      })
+      .catch(errors => this.setState(prevState => {
+        return {
+          ...prevState,
+          errors: {
+            ...prevState.errors,
+            email: 'Email or Password is Incorrect'
+          }
+        }
+      }));
   };
 
   handleSubmit = event => {
