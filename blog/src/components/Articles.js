@@ -11,9 +11,9 @@ export default class Articles extends React.Component{
       return (
         <section className="articles-container">
           <div className="container flex">
-            <FeedNav clearTag={this.props.clearTag} selectedTag={this.props.selectedTag} />
+            <FeedNav user={this.props.user} clearTag={this.props.clearTag} selectedTag={this.props.selectedTag} />
             {
-              this.props.articles.map(article => (
+              this.props.articles?.map(article => (
                 <article key={article.slug} className="article-card flex">
                   <div className="user-info flex">
                     <img src={article.author.image} className='user-icon' />
@@ -35,7 +35,7 @@ export default class Articles extends React.Component{
                     </Link>
                     <ul className='article-card-tag-list flex'>
                       {
-                        article.tagList.map(tag => (
+                        article.tagList?.map(tag => (
                           <li key={tag} className='text-xsm text-secondary tag-item'>{tag}</li>
                         ))
                       }

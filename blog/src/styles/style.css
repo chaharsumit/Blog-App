@@ -371,6 +371,21 @@ input::placeholder{
 
 /* Pagination styles */
 
+/* Article Compose styles */
+
+.compose{
+  align-items: center;
+  justify-content: center;
+  padding-top: 4rem;
+}
+
+.compose-textarea{
+  height: 200px;
+  resize: none;
+}
+
+/* Article Compose styles */
+
 
 /* Loader CSS */
 

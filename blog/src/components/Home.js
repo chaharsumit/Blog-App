@@ -101,6 +101,7 @@ export default class Home extends React.Component {
               selectedTag={this.state.selectedTag}
               filteredArticles={this.state.filteredArticles}
               getDate={this.props.getDate}
+              user={this.props.user}
             />
             <Aside handleTagSelect={this.handleTagSelect} />
           </div>

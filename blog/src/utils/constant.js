@@ -10,4 +10,6 @@ const LoginURL = ROOT_URL + 'users/login';
 
 const tagsURL = ROOT_URL + 'tags';
 
-export { ROOT_URL, articlesURL, userURL, tagsURL, LoginURL, registerURL };
+const composeURL = ROOT_URL + 'articles';
+
+export { ROOT_URL, articlesURL, composeURL, userURL, tagsURL, LoginURL, registerURL };

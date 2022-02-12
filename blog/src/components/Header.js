@@ -31,7 +31,7 @@ export default class Header extends React.Component {
               {this.props.isLoggedIn && this.props.user ? (
                 <>
                   <NavLink
-                      to="/"
+                      to="/compose"
                       style={({ isActive }) =>
                         isActive ? activeStyle : nonActiveStyle
                       }

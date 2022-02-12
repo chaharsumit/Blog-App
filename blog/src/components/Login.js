@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { LoginURL } from "../utils/constant";
 import { setToken } from "../utils/storage";
-import { Navigate } from "react-router-dom";
 
 export default class Login extends React.Component {
   constructor(props) {
