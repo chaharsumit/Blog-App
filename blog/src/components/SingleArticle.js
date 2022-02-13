@@ -1,38 +1,110 @@
-import React from 'react';
-import ArticleHero from './ArticleHero';
-import ArticleBody from './ArticleBody';
-import Comment from './Comment';
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import Loader from './Loader';
+import React from "react";
+import ArticleHero from "./ArticleHero";
+import ArticleBody from "./ArticleBody";
+import Comment from "./Comment";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Loader from "./Loader";
+import { ROOT_URL } from "../utils/constant";
+import { getToken } from "../utils/storage";
 
-export default function SingleArticle(props){
+///api/articles/:slug/favorite
+
+export default function SingleArticle(props) {
   const [article, setArticle] = useState(null);
   let slug = useParams().slug;
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    fetch(props.baseUrl + '/' + slug).then(res => res.json()).then(article => setArticle({
-      article
-    }));
+    fetchArticle();
   }, []);
 
-  function getUi(){
-    if(!article){
-      return <Loader />
-    }else{
-      return (
-        <>
-          <ArticleHero article={article} getDate={props.getDate} />
-          <ArticleBody article={article} />
-          <Comment article={article} baseUrl={props.baseUrl} user={props.user} getDate={props.getDate} />
-        </>
-      )
+  function fetchArticle() {
+    fetch(props.baseUrl + "/" + slug)
+      .then(res => res.json())
+      .then(article =>
+        setArticle({
+          article
+        })
+      );
+  }
+
+  async function deleteArticle() {
+    try {
+      await fetch(ROOT_URL + `articles/${article.article.article.slug}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Token ${getToken()}`
+        }
+      });
+
+      navigate("/");
+    } catch (error) {
+      console.dir(error);
     }
   }
-  return (
-    getUi()
-  )
-}
 
+  function favouriteArticle() {
+    fetch(ROOT_URL + `articles/${article.article.article.slug}/favorite`, {
+      method: "POST",
+      headers: {
+        Authorization: `Token ${getToken()}`
+      }
+    })
+      .then(res => res.json())
+      .then(article =>
+        setArticle({
+          article
+        })
+      );
+  }
+
+  function unfavouriteArticle() {
+    fetch(ROOT_URL + `articles/${article.article.article.slug}/favorite`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${getToken()}`
+      }
+    })
+      .then(res => res.json())
+      .then(article =>
+        setArticle({
+          article
+        })
+      );
+  }
+
+  function editArticle(){
+
+  }
+
+  function getUi() {
+    if (!article) {
+      return <Loader />;
+    } else {
+      return (
+        <>
+          <ArticleHero
+            user={props.user}
+            deleteArticle={deleteArticle}
+            article={article}
+            getDate={props.getDate}
+            unfavouriteArticle={unfavouriteArticle}
+            favouriteArticle={favouriteArticle}
+          />
+          <ArticleBody article={article} />
+          <Comment
+            article={article}
+            baseUrl={props.baseUrl}
+            user={props.user}
+            getDate={props.getDate}
+          />
+        </>
+      );
+    }
+  }
+  return getUi();
+}
 
 /* articels happeing  due to passing object rather than value in setArticle */

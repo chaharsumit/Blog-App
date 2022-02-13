@@ -11,6 +11,7 @@ import Settings from "./components/Settings";
 import Profile from "./components/Profile";
 import Compose from "./components/Compose";
 import CurrUserProfile from "./components/CurrUserProfile";
+import EditArticle from './components/EditArticle';
 
 import WithRouter from "./components/WithRouter";
 
@@ -154,6 +155,10 @@ function AuthenticatedApp(props) {
         <Route
           path="/articles/:slug"
           element={<SingleArticle baseUrl={baseUrl} user={props.user} getDate={props.getDate} />}
+        />
+        <Route
+          path="/articles/editor/:slug"
+          element={<EditArticle baseUrl={baseUrl} user={props.user} getDate={props.getDate} />}
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

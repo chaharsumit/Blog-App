@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 export default function ArticleHero(props){
   let article = props.article.article;
   return (
@@ -12,6 +14,10 @@ export default function ArticleHero(props){
               props.getDate(article.article.createdAt)
             }
             </time>
+            <span onClick={props.deleteArticle}>{props.user && props.user.username === article.article.author.username ? 'Delete Article' : ''}</span>
+            {props.user && !article.article.favorited ? <span onClick={props.favouriteArticle}>Favourite Article</span> : ''}
+            {props.user && article.article.favorited ? <span onClick={props.unfavouriteArticle}>Unfavourite Article</span> : ''}
+            {props.user && article.article.author.username === props.user.username ? <Link to={`/articles/editor/${article.article.slug}`}>Edit article</Link> : ''} 
           </div>
         </div>
       </div>
