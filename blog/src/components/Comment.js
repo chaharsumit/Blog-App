@@ -48,6 +48,16 @@ export default function Comment(props){
     )
   }
 
+  function deleteComment(id){
+    fetch(ROOT_URL + `articles/${props.article.article.article.slug}/comments/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${getToken()}`
+      },
+    })
+      .then(() => fetchComments());
+  }
+
   function getComments(){
     if(!comments){
       return <p>Loading Comments...</p>
@@ -66,6 +76,9 @@ export default function Comment(props){
                     <img src={comment.author.image} className='user-icon-sm' />
                     <p className='text-xsm text-light'>{comment.author.username}</p>
                     <time className='text-xsm text-light'>{props.getDate(comment.createdAt)}</time>
+                    {
+                      props.user && props.user.username === comment.author.username ? <span onClick={() => deleteComment(comment.id)}>❌</span> : ''
+                    }
                   </div>
                 </li>
               )) 
