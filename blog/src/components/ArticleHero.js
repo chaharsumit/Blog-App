@@ -17,7 +17,9 @@ export default function ArticleHero(props){
             <span onClick={props.deleteArticle}>{props.user && props.user.username === article.article.author.username ? 'Delete Article' : ''}</span>
             {props.user && !article.article.favorited ? <span onClick={props.favouriteArticle}>Favourite Article</span> : ''}
             {props.user && article.article.favorited ? <span onClick={props.unfavouriteArticle}>Unfavourite Article</span> : ''}
-            {props.user && article.article.author.username === props.user.username ? <Link to={`/articles/editor/${article.article.slug}`}>Edit article</Link> : ''} 
+            {props.user && article.article.author.username === props.user.username ? <Link to={`/articles/editor/${article.article.slug}`}>Edit article</Link> : ''}
+            {props.user && article.article.author.username === props.user.username && !props.profile.following ? '' : <span onClick={props.followUser}>Follow</span>}
+            {props.user && article.article.author.username === props.user.username && props.profile.following ? <span onClick={props.unfollowUser}>Unfollow</span> : ''}
           </div>
         </div>
       </div>

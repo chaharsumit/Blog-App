@@ -12,6 +12,7 @@ import { getToken } from "../utils/storage";
 
 export default function SingleArticle(props) {
   const [article, setArticle] = useState(null);
+  const [profile, setProfile] = useState(null);
   let slug = useParams().slug;
 
   const navigate = useNavigate();
@@ -68,15 +69,37 @@ export default function SingleArticle(props) {
       }
     })
       .then(res => res.json())
-      .then(article =>
-        setArticle({
-          article
-        })
+      .then(({profile}) =>
+        setProfile(
+          profile
+        )
       );
   }
 
-  function editArticle(){
+  function followUser(){
+    fetch(ROOT_URL + `profiles/${article.article.article.author.username}/follow`, {
+      method: "POST",
+      headers: {
+        Authorization: `Token ${getToken()}`
+      }
+    })
+      .then(res => res.json())
+      .then(({profile}) =>
+        setProfile(profile)
+      );
+  }
 
+  function unfollowUser(){
+    fetch(ROOT_URL + `profiles/${article.article.article.author.username}/follow`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${getToken()}`
+      }
+    })
+      .then(res => res.json())
+      .then(({profile}) =>
+        setArticle(profile)
+      );
   }
 
   function getUi() {
@@ -92,6 +115,9 @@ export default function SingleArticle(props) {
             getDate={props.getDate}
             unfavouriteArticle={unfavouriteArticle}
             favouriteArticle={favouriteArticle}
+            followUser={followUser}
+            unfollowUser={unfollowUser}
+            profile={profile}
           />
           <ArticleBody article={article} />
           <Comment
