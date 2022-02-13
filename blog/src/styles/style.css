@@ -386,6 +386,43 @@ input::placeholder{
 
 /* Article Compose styles */
 
+/* Profile styles */
+
+.profile-hero{
+  background-color: rgb(228, 101, 101);
+  padding: 2rem 0; 
+}
+
+.profile-hero .container{
+  flex-direction: column;
+}
+
+.profile-info{
+  margin-bottom: 2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-image{
+  width: 100px;
+  height: 100px;
+}
+
+.setting-btn{
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  width: fit-content;
+  align-self: flex-end;
+}
+
+.profile-feed-section{
+  padding: 2rem 0;
+}
+
+/* Profile styles */
+
 
 /* Loader CSS */
 

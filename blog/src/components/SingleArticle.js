@@ -33,3 +33,6 @@ export default function SingleArticle(props){
     getUi()
   )
 }
+
+
+/* articels happeing  due to passing object rather than value in setArticle */

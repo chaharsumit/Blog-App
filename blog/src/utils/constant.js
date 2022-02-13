@@ -4,6 +4,8 @@ const articlesURL = ROOT_URL + 'articles';
 
 const registerURL = ROOT_URL + 'users';
 
+const updateUserURL = ROOT_URL + 'user';
+
 const userURL = ROOT_URL + '/user';
 
 const LoginURL = ROOT_URL + 'users/login';
@@ -12,4 +14,6 @@ const tagsURL = ROOT_URL + 'tags';
 
 const composeURL = ROOT_URL + 'articles';
 
-export { ROOT_URL, articlesURL, composeURL, userURL, tagsURL, LoginURL, registerURL };
+const profileURL = ROOT_URL + `profiles/`;
+
+export { ROOT_URL, articlesURL, updateUserURL, profileURL,composeURL, userURL, tagsURL, LoginURL, registerURL };

@@ -5,16 +5,15 @@ import { articlesURL } from "../utils/constant";
 import { profileURL } from "../utils/constant";
 
 
-export default function Profile(props) {
+
+export default function CurrUserProfile(props) {
   const [activeTab, setTab] = useState("author");
   const [articles, setArticles] = useState(null);
-  const [userProfile, setProfile] = useState(null);
 
   let params = useParams();
 
   useEffect(() => {
-      getProfileUser();
-      getProfileArticles();
+    getCurrUserArticles();
   }, [activeTab]);
   
 
@@ -29,24 +28,10 @@ export default function Profile(props) {
         );
     }
   */
-
-
-  function getProfileUser() {
-    fetch(profileURL + params.username, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    })
-      .then(res => res.json())
-      .then(({profile}) => {
-        setProfile(profile)
-      });
-  }
-
-  function getProfileArticles() {
+  
+  function getCurrUserArticles() {
     let limit = 10;
-    let new_url = (activeTab === 'author' ? `/?limit=${limit}&author=${params.username}` : `/?limit=${limit}&favorited=${params.username}`);
+    let new_url = (activeTab === 'author' ? `/?limit=${limit}&author=${props.user.username}` : `/?limit=${limit}&favorited=${props.user.username}`);
     fetch(articlesURL + new_url)
       .then(res => {
         if (!res.ok) {
@@ -72,19 +57,16 @@ export default function Profile(props) {
   }
 
   return (
-    !userProfile ? 'Loading' : (
     <>
       <section className="profile-hero">
         <div className="container flex">
           <div className="profile-info flex">
-            <img src={userProfile ? userProfile.image : 'logo512.png'} className="profile-image" />
-            <h3>{userProfile ? params.username : props.user.username}</h3>
-            <p>{userProfile ? userProfile.bio : props.user.bio}</p>
+            <img src={props.user.image} className="profile-image" />
+            <h3>{props.user.username}</h3>
+            <p>{props.user.bio}</p>
           </div>
           <button className="setting-btn flex">
-            {
-              userProfile ? <Link to="/">Follow user</Link> : <Link to="/settings">Profile Settings</Link>
-            }
+            <Link to="/settings">Profile Settings</Link>
           </button>
         </div>
       </section>
@@ -139,7 +121,7 @@ export default function Profile(props) {
             }
           </div>
         </section>
-    </>)
+    </>
   );
 }
 /*

@@ -10,6 +10,7 @@ import { userURL } from "./utils/constant";
 import Settings from "./components/Settings";
 import Profile from "./components/Profile";
 import Compose from "./components/Compose";
+import CurrUserProfile from "./components/CurrUserProfile";
 
 import WithRouter from "./components/WithRouter";
 
@@ -33,7 +34,7 @@ export default class App extends React.Component {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${localStorage.token}`
+        Authorization: `Token ${getToken()}`
       }
     })
       .then(res => res.json())
@@ -145,7 +146,8 @@ function AuthenticatedApp(props) {
           element={<Home getDate={props.getDate} user={props.user} />}
         />
         <Route path="/settings" element={<Settings />} />
-        <Route path="/" element={<Profile />} />
+        <Route path="/profile" element={<CurrUserProfile user={props.user} getDate={props.getDate} />} />
+        <Route path='/profiles/:username' element={<Profile user={props.user} getDate={props.getDate} />} />
         <Route
           path="/compose"
           element={<Compose user={props.user} />} />

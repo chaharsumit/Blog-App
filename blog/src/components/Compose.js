@@ -57,7 +57,6 @@ export default class Compose extends React.Component {
   };
 
   render() {
-    console.log(`/articles/${this.state.slug}`);
     return this.state.success ? (
       <Navigate to={`/articles/${this.state.redirectTo}`} replace={true} />
     ) : (

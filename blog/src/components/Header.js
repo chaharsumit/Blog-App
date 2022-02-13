@@ -39,7 +39,7 @@ export default class Header extends React.Component {
                       <li className="nav-item">Compose</li>
                   </NavLink>
                   <NavLink
-                      to="/"
+                      to="/settings"
                       style={({ isActive }) =>
                         isActive ? activeStyle : nonActiveStyle
                       }
@@ -47,12 +47,12 @@ export default class Header extends React.Component {
                       <li className="nav-item">Settings</li>
                   </NavLink>
                   <NavLink
-                      to="/"
+                      to="/profile"
                       style={({ isActive }) =>
                         isActive ? activeStyle : nonActiveStyle
                       }
                     >
-                      <li className="nav-item">{user.email}</li>
+                      <li className="nav-item">{user.username}</li>
                   </NavLink>
                   <li onClick={this.props.Logout} className="nav-item">Logout</li>
                 </>
