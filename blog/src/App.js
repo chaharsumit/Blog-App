@@ -153,7 +153,7 @@ function AuthenticatedApp(props) {
           element={<Compose user={props.user} />} />
         <Route
           path="/articles/:slug"
-          element={<SingleArticle baseUrl={baseUrl} getDate={props.getDate} />}
+          element={<SingleArticle baseUrl={baseUrl} user={props.user} getDate={props.getDate} />}
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

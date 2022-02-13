@@ -24,7 +24,7 @@ export default function SingleArticle(props){
         <>
           <ArticleHero article={article} getDate={props.getDate} />
           <ArticleBody article={article} />
-          <Comment article={article} baseUrl={props.baseUrl} getDate={props.getDate} />
+          <Comment article={article} baseUrl={props.baseUrl} user={props.user} getDate={props.getDate} />
         </>
       )
     }

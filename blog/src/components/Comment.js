@@ -1,15 +1,52 @@
 import { useState, useEffect } from "react";
 import Loader from './Loader';
+import { ROOT_URL } from "../utils/constant";
+import { getToken } from "../utils/storage";
 
 export default function Comment(props){
   const [comments, setComment] = useState(null);
+  const [body, setBody] = useState(null);
   let article = props.article.article.article;
 
   useEffect(() => {
+    fetchComments();
+  },[]);
+
+  function fetchComments(){
     fetch(props.baseUrl + '/' + article.slug + '/comments').then(res => res.json()).then(comments => setComment({
       comments
     }));
-  },[])
+  }
+
+
+  function postComment(){
+    fetch(ROOT_URL + `articles/${props.article.article.article.slug}/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${getToken()}`
+      },
+      body: JSON.stringify({
+        comment: {
+          body: body,
+        }
+      })
+    })
+      .then(res => res.json())
+      .then(() => fetchComments());
+  }
+
+  function handleComment(event){
+    event.preventDefault();
+    postComment();
+  }
+
+  function handleChange({target}){
+    let { value } = target;
+    setBody(
+      value
+    )
+  }
 
   function getComments(){
     if(!comments){
@@ -17,7 +54,9 @@ export default function Comment(props){
     }else{
       return (
         <>
-          <p>Sign up or Sign in to add comments to this article</p>
+          {
+            props.user ? <CommentForm handleChange={handleChange} handleComment={handleComment} />  : <p>Sign up or Sign in to add comments to this article</p>
+          }
           <ul className='comment-cards-list flex'>
             {
               comments.comments.comments.map(comment => (
@@ -45,5 +84,16 @@ export default function Comment(props){
         }
       </div>
     </section>
+  )
+}
+
+function CommentForm(props){
+  return (
+    <form onSubmit={props.handleComment} className="comment-form flex">
+      <textarea onChange={props.handleChange} value={props.body} name='body' type='text' placeholder='Add Comment' className="comment-textarea form-control"  />
+      <fieldset className="comment-fieldset flex">
+        <input type='submit' value='Post Comment' className="comment-submit" />
+      </fieldset>
+    </form>
   )
 }
