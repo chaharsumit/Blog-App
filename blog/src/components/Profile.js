@@ -37,6 +37,7 @@ export default function Profile(props) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Token ${getToken()}`
       }
     })
       .then(res => res.json())
@@ -76,13 +77,13 @@ export default function Profile(props) {
     fetch(ROOT_URL + `profiles/${params.username}/follow`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Token ${getToken()}`
       }
     })
       .then(res => res.json())
       .then(({profile}) => {
         setProfile(profile)
+        console.log(profile)
       });
   }
 
@@ -90,7 +91,6 @@ export default function Profile(props) {
     fetch(ROOT_URL + `profiles/${params.username}/follow`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Token ${getToken()}`
       }
     })

@@ -22,7 +22,12 @@ export default function SingleArticle(props) {
   }, []);
 
   function fetchArticle() {
-    fetch(props.baseUrl + "/" + slug)
+    fetch(props.baseUrl + "/" + slug, {
+      method: "GET",
+      headers: {
+        Authorization: `Token ${getToken()}`
+      },
+    })
       .then(res => res.json())
       .then(article =>
         setArticle({
