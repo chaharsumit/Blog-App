@@ -6,7 +6,7 @@ const registerURL = ROOT_URL + 'users';
 
 const updateUserURL = ROOT_URL + 'user';
 
-const userURL = ROOT_URL + '/user'; //to see
+const userURL = ROOT_URL + 'user'; //to see
 
 const LoginURL = ROOT_URL + 'users/login';
 

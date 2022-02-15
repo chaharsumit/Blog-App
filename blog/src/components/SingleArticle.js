@@ -5,7 +5,7 @@ import Comment from "./Comment";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Loader from "./Loader";
-import { ROOT_URL } from "../utils/constant";
+import { ROOT_URL, userURL } from "../utils/constant";
 import { getToken } from "../utils/storage";
 
 ///api/articles/:slug/favorite
@@ -58,7 +58,7 @@ export default function SingleArticle(props) {
         setArticle({
           article
         })
-      );
+      )
   }
 
   function unfavouriteArticle() {
@@ -69,36 +69,10 @@ export default function SingleArticle(props) {
       }
     })
       .then(res => res.json())
-      .then(({profile}) =>
-        setProfile(
-          profile
-        )
-      );
-  }
-
-  function followUser(){
-    fetch(ROOT_URL + `profiles/${article.article.article.author.username}/follow`, {
-      method: "POST",
-      headers: {
-        Authorization: `Token ${getToken()}`
-      }
-    })
-      .then(res => res.json())
-      .then(({profile}) =>
-        setProfile(profile)
-      );
-  }
-
-  function unfollowUser(){
-    fetch(ROOT_URL + `profiles/${article.article.article.author.username}/follow`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Token ${getToken()}`
-      }
-    })
-      .then(res => res.json())
-      .then(({profile}) =>
-        setArticle(profile)
+      .then(article =>
+        setArticle({
+          article
+        })
       );
   }
 
@@ -115,8 +89,6 @@ export default function SingleArticle(props) {
             getDate={props.getDate}
             unfavouriteArticle={unfavouriteArticle}
             favouriteArticle={favouriteArticle}
-            followUser={followUser}
-            unfollowUser={unfollowUser}
             profile={profile}
           />
           <ArticleBody article={article} />

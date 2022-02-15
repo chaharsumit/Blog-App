@@ -5,6 +5,7 @@ import Aside from "./Aside";
 import Loader from "./Loader";
 import Pagination from "./Pagination";
 import { articlesURL } from "../utils/constant";
+import { getToken } from "../utils/storage";
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -15,7 +16,8 @@ export default class Home extends React.Component {
       articles: null,
       articlesCount: 0,
       activePageIndex: 1,
-      error: ''
+      error: '',
+      activeFeed: 'user'
     };
   }
 
@@ -26,7 +28,7 @@ export default class Home extends React.Component {
   componentDidUpdate(_prevProps, prevState) {
     if (
       prevState.activePageIndex !== this.state.activePageIndex ||
-      prevState.selectedTag !== this.state.selectedTag
+      prevState.selectedTag !== this.state.selectedTag || prevState.activeFeed !== this.state.activeFeed
     ) {
       this.generateUrlAndFetch();
     }
@@ -36,23 +38,35 @@ export default class Home extends React.Component {
     let limit = 10;
     let offset = (this.state.activePageIndex - 1) * 10;
     let tag = this.state.selectedTag;
-    fetch(
-      articlesURL + `/?limit=${limit}&offset=${offset}` + (tag && `&tag=${tag}`)
-    )
-      .then(res => {
-        if(!res.ok){
-          throw new Error(res.statusText);
+    if(this.props.user && this.state.activeFeed === 'user'){
+      fetch(articlesURL + '/feed', {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${getToken()}`
         }
-        return res.json()
       })
-      .then(({ articlesCount, articles }) =>
-        this.setState({
-          articles: articles,
-          articlesCount: articlesCount
+        .then(res => res.json())
+        .then(({articlesCount, articles})=> this.setState({ articles: articles, articlesCount: articlesCount }));
+    }else{
+      fetch(
+        articlesURL + `/?limit=${limit}&offset=${offset}` + (tag && `&tag=${tag}`)
+      )
+        .then(res => {
+          if(!res.ok){
+            throw new Error(res.statusText);
+          }
+          return res.json()
         })
-      ).catch((err) => {
-        this.setState({error: 'Not Able to fetch articles'})
-      })
+        .then(({ articlesCount, articles }) =>
+          this.setState({
+            articles: articles,
+            articlesCount: articlesCount
+          })
+        ).catch((err) => {
+          this.setState({error: 'Not Able to fetch articles'})
+        })
+    }
   };
 
   handleTagSelect = ({ target }) => {
@@ -61,6 +75,7 @@ export default class Home extends React.Component {
       return null;
     } else {
       this.setState({
+        activeFeed: null,
         selectedTag: value,
         activePageIndex: 1
       });
@@ -73,6 +88,15 @@ export default class Home extends React.Component {
       activePageIndex: 1
     });
   };
+
+  clearTagAndFeed = ({target}) => {
+    let val = target.id;
+    this.setState({
+      selectedTag: "",
+      activePageIndex: 1,
+      activeFeed: val
+    })
+  }
 
   handlePagination = (page) => {
     this.setState({
@@ -102,6 +126,8 @@ export default class Home extends React.Component {
               filteredArticles={this.state.filteredArticles}
               getDate={this.props.getDate}
               user={this.props.user}
+              clearTagAndFeed={this.clearTagAndFeed}
+              activeFeed={this.state.activeFeed}
             />
             <Aside handleTagSelect={this.handleTagSelect} />
           </div>

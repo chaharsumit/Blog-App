@@ -87,6 +87,7 @@ export default class App extends React.Component {
             user={this.state.user}
             isLoggedIn={this.isLoggedIn}
             setUser={this.setUser}
+            followUser={this.followUser}
           />
         ) : (
           <UnauthenticatedApp
@@ -131,7 +132,7 @@ function UnauthenticatedApp(props) {
         />
         <Route
           path="/articles/:slug"
-          element={<SingleArticle baseUrl={baseUrl} getDate={props.getDate} />}
+          element={<SingleArticle user={props.user} baseUrl={baseUrl} getDate={props.getDate} />}
         />
       </Routes>
     </>

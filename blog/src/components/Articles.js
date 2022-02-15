@@ -7,11 +7,12 @@ export default class Articles extends React.Component{
     super(props);
   }
 
+
   render(){
       return (
         <section className="articles-container">
           <div className="container flex">
-            <FeedNav user={this.props.user} clearTag={this.props.clearTag} selectedTag={this.props.selectedTag} />
+            <FeedNav user={this.props.user} activeFeed={this.props.activeFeed} clearTagAndFeed={this.props.clearTagAndFeed} clearTag={this.props.clearTag} selectedTag={this.props.selectedTag} />
             {
               this.props.articles?.map(article => (
                 <article key={article.slug} className="article-card flex">

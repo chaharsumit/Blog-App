@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
-import { articlesURL } from "../utils/constant";
+import { articlesURL, ROOT_URL } from "../utils/constant";
 import { profileURL } from "../utils/constant";
+import { getToken } from "../utils/storage";
 
 
 export default function Profile(props) {
@@ -71,6 +72,34 @@ export default function Profile(props) {
     );
   }
 
+  function followUser(){
+    fetch(ROOT_URL + `profiles/${params.username}/follow`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${getToken()}`
+      }
+    })
+      .then(res => res.json())
+      .then(({profile}) => {
+        setProfile(profile)
+      });
+  }
+
+  function unfollowUser(){
+    fetch(ROOT_URL + `profiles/${params.username}/follow`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${getToken()}`
+      }
+    })
+      .then(res => res.json())
+      .then(({profile}) => {
+        setProfile(profile)
+      });
+  }
+
   return (
     !userProfile ? 'Loading' : (
     <>
@@ -81,11 +110,10 @@ export default function Profile(props) {
             <h3>{userProfile ? params.username : props.user.username}</h3>
             <p>{userProfile ? userProfile.bio : props.user.bio}</p>
           </div>
-          <button className="setting-btn flex">
             {
-              userProfile ? <Link to="/">Follow user</Link> : <Link to="/settings">Profile Settings</Link>
+              !userProfile.following ? <button className="setting-btn flex" onClick={followUser}>Follow user</button> : <button className="setting-btn flex" onClick={unfollowUser}>Unfollow user</button>
             }
-          </button>
+            { !userProfile ? <button className="setting-btn flex"><Link to="/settings">Profile Settings</Link></button> : '' }
         </div>
       </section>
       <section className="profile-feed-section container">
