@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -8,16 +8,22 @@ export default class Header extends React.Component {
 
   render() {
     let activeStyle = {
-      textDecoration: "underline"
+      textDecoration: "underline",
+      color: "rgb(228, 101, 101)",
+      fontWeight: '900',
+      textShadow: '0 0 0.05rem'
     };
     let nonActiveStyle = {
-      textDecoration: "none"
+      textDecoration: "none",
+      color: "rgb(228, 101, 101)"
     };
     let user = this.props.user;
     return (
       <header className="header">
         <div className="container flex">
-          <a className="logo">Conduit.</a>
+          <Link to="/" style={{textDecoration: 'none'}}>
+            <a className="logo text-danger">Conduit.</a>
+          </Link>
           <nav className="navbar">
             <ul className="nav-menu flex">
               <NavLink
@@ -54,7 +60,11 @@ export default class Header extends React.Component {
                     >
                       <li className="nav-item">{user.username}</li>
                   </NavLink>
-                  <li onClick={this.props.Logout} className="nav-item">Logout</li>
+                  <li onClick={this.props.Logout} className="nav-item logout-btn">
+                    <Link to='/' className="text-light site-link">
+                      Logout  
+                    </Link>
+                  </li>
                 </>
               ) : (
                 <>

@@ -116,7 +116,7 @@ export default class Settings extends React.Component {
             onChange={this.handleChange}
             value={this.state.image}
             type="text"
-            name="text"
+            name="image"
             placeholder="Enter image Url"
             className="form-control"
           />

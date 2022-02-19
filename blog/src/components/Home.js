@@ -6,6 +6,7 @@ import Loader from "./Loader";
 import Pagination from "./Pagination";
 import { articlesURL } from "../utils/constant";
 import { getToken } from "../utils/storage";
+import { ROOT_URL } from "../utils/constant";
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -120,6 +121,7 @@ export default class Home extends React.Component {
           <Hero />
           <div className="main-wrapper container flex">
             <Articles
+              addToFavourites={this.addToFavourites}
               articles={this.state.articles}
               clearTag={this.clearTag}
               selectedTag={this.state.selectedTag}

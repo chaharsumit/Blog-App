@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import Loader from './Loader';
 import { ROOT_URL } from "../utils/constant";
 import { getToken } from "../utils/storage";
+import { Link } from 'react-router-dom';
 
 export default function Comment(props){
   const [comments, setComment] = useState(null);
@@ -65,7 +65,7 @@ export default function Comment(props){
       return (
         <>
           {
-            props.user ? <CommentForm handleChange={handleChange} handleComment={handleComment} />  : <p>Sign up or Sign in to add comments to this article</p>
+            props.user ? <CommentForm handleChange={handleChange} handleComment={handleComment} />  : <p><Link to='/signup' className='text-danger'>Sign up</Link> or <Link to='/login' className="text-danger">Sign in</Link> to add comments to this article</p>
           }
           <ul className='comment-cards-list flex'>
             {
@@ -73,7 +73,7 @@ export default function Comment(props){
                 <li key={comment.id} className='comment-card'>
                   <p className='text-xsm comment-description'>{comment.body}</p>
                   <div className='comment-author-info flex'>
-                    <img src={comment.author.image} className='user-icon-sm' />
+                    <img src={comment.author.image ? comment.author.image : "logo512.png"} className='user-icon-sm' />
                     <p className='text-xsm text-light'>{comment.author.username}</p>
                     <time className='text-xsm text-light'>{props.getDate(comment.createdAt)}</time>
                     {

@@ -52,23 +52,29 @@ table {
 }
 .container{
   width: 100%;
-  max-width: 1200px;
+  max-width: 1500px;
   padding: 0 1rem;
   margin: 0 auto;
 }
 .header{
   padding: 1rem 0;
   align-items: center;
+  background-color: white;
 }
 .align-left{
   text-align: left;
 }
-
-
+.site-link{
+  text-decoration: none;
+}
+.site-link:hover{
+  text-decoration: underline;
+  color: rgb(228, 101, 101);
+}
 /* Text Styles */
 
 .text-xlg{
-  font-size: 3rem;
+  font-size: 4rem;
 }
 
 .text-lg{
@@ -91,6 +97,10 @@ table {
   color: #a7a4a4;
 }
 
+.text-dark{
+  color: black;
+}
+
 .text-primary{
   color: rgb(228, 101, 101);
 }
@@ -104,7 +114,7 @@ table {
 }
 
 .text-danger{
-  color: orangered;
+  color: rgb(228, 101, 101);
 }
 
 .text-bold{
@@ -120,7 +130,6 @@ table {
 .logo{
   font-size: 2rem;
   font-weight: 900;
-  color: rgb(228, 101, 101);
 }
 .navbar{
   margin-left: auto;
@@ -131,8 +140,9 @@ table {
   font-size: 1rem;
 }
 .nav-item:hover{
-  color:rgb(228, 101, 101);
   cursor: pointer;
+  font-weight: 900;
+  text-shadow: 0rem 0 0.1rem;
 }
 .active-nav-item{
   color:rgb(228, 101, 101);
@@ -142,15 +152,31 @@ table {
   color: black;
 }
 
+.logout-btn{
+  background-color: rgb(228, 101, 101);
+  border-radius: 0.5rem;
+}
+
 /* Navbar styles */
 
 /* Hero styles */
 
 .hero{
   text-align: center;
-  background-color: rgb(228, 101, 101);
-  padding: 3rem 0;
+  background-image: url('/public/wallpaper2.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 80%;
+  padding: 10rem 0;
   color: white;
+}
+
+.article-hero{
+  background-image: url('/public/profile.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 20%;
+  padding: 10rem 0;
 }
 
 /* Hero styles */
@@ -177,12 +203,17 @@ table {
   font-weight: 900;
 }
 
+.feed-status:hover{
+  cursor: pointer;
+  font-weight: 700;
+}
+
 /* Articles feed menu */
 
 /* Articles card styles */
 
 .articles-container{
-  flex: 0 1 70%;
+  flex: 0 1 60%;
   padding-bottom: 2rem;
 }
 .articles-container .container{
@@ -225,27 +256,47 @@ table {
   color: rgb(228, 101, 101);
   cursor: pointer;
 }
+.favourite-count{
+  display: block;
+  border: 1px solid rgb(228, 101, 101);
+  width: fit-content;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  background-color: rgb(228, 101, 101);
+  color: white;
+}
+.favourite-count:hover{
+  box-shadow: 0 0 0.25rem rgb(228, 101, 101);
+  cursor: pointer;
+}
 
 /* Articles card styles */
 
 /* Tags container styles */
 
 .tags-container{
-  padding: 1rem 0.5rem;
-  flex: 0 1 20%;
-  background-color: rgb(228, 101, 101);
-  border-radius: 1rem;
+  padding: 0 0.5rem;
+  flex: 0 1 35%;
   height: fit-content;
 }
+.tag-heading{
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
 .tags-menu{
-  gap: 0.5rem 1rem;
+  gap: 0.5rem 0.5rem;
   flex-wrap: wrap;
   color: white;
 }
 .tags-menu-item{
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.5rem;
+  background-color: rgb(228, 101, 101);
   border: 1px solid white;
   border-radius: 2rem;
+}
+.tags-menu-item:hover{
+  cursor: pointer;
+  box-shadow: 0 0 0.5rem rgb(228, 101, 101);
 }
 
 /* Tags container styles */
@@ -308,6 +359,12 @@ input::placeholder{
   padding-bottom: 2rem;
   row-gap: 2rem;
   align-items: flex-start;
+}
+
+.article-button-menu{
+  justify-content: flex-end;
+  gap: 1rem;
+  align-items: center;
 }
 
 /* Article body styles */
@@ -414,8 +471,11 @@ input::placeholder{
 /* Profile styles */
 
 .profile-hero{
-  background-color: rgb(228, 101, 101);
-  padding: 2rem 0; 
+  background-image: url('/public/profile-hero.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 80%;
+  padding: 10rem 0;
 }
 
 .profile-hero .container{
@@ -440,6 +500,10 @@ input::placeholder{
   border-radius: 0.5rem;
   width: fit-content;
   align-self: flex-end;
+}
+
+.setting-btn:hover{
+  cursor: pointer;
 }
 
 .profile-feed-section{

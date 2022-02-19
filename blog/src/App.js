@@ -13,8 +13,6 @@ import Compose from "./components/Compose";
 import CurrUserProfile from "./components/CurrUserProfile";
 import EditArticle from './components/EditArticle';
 
-import WithRouter from "./components/WithRouter";
-
 let baseUrl = "https://mighty-oasis-08080.herokuapp.com/api/articles";
 export default class App extends React.Component {
   constructor(props) {

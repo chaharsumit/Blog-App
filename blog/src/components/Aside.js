@@ -32,15 +32,18 @@ export default class Aside extends React.Component {
     if (this.state.tags) {
       return (
         <div className="tags-container">
+          <h3 className="text-md tag-heading text-danger">#Popular Tags</h3>
           <ul className="tags-menu flex">
             {this.state.tags.map(tag => (
-              <li
+              tag ?
+              (<li
                 key={tag}
                 onClick={this.props.handleTagSelect}
-                className="tags-menu-item"
+                className="tags-menu-item text-xsm"
               >
                 {tag}
-              </li>
+              </li>) 
+              : ''
             ))}
           </ul>
         </div>
@@ -48,7 +51,8 @@ export default class Aside extends React.Component {
     } else {
       return (
         <div className="tags-container">
-          <Loader />
+          <h3 className="text-md tag-heading text-danger">#Popular Tags</h3>  
+          <p>Loading Tags...</p>
         </div>
       );
     }

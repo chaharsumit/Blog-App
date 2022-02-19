@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import { articlesURL } from "../utils/constant";
-import { profileURL } from "../utils/constant";
 
 
 
@@ -61,12 +60,16 @@ export default function CurrUserProfile(props) {
       <section className="profile-hero">
         <div className="container flex">
           <div className="profile-info flex">
-            <img src={props.user.image} className="profile-image" />
-            <h3>{props.user.username}</h3>
+            <img src={props.user.image ? props.user.image : "logo512.png"} className="profile-image" />
+            <h3>
+              <Link to='/profile' className="text-sm site-link text-light">
+                {props.user.username}
+              </Link>
+            </h3>
             <p>{props.user.bio}</p>
           </div>
           <button className="setting-btn flex">
-            <Link to="/settings">Profile Settings</Link>
+            <Link className="site-link text-dark" to="/settings">Profile Settings</Link>
           </button>
         </div>
       </section>
@@ -90,7 +93,7 @@ export default function CurrUserProfile(props) {
                   articles.articles.map(article => (
                     <article key={article.slug} className="article-card flex">
                       <div className="user-info flex">
-                        <img src={article.author.image} className='user-icon' />
+                        <img src={article.author.image ? article.author.image : "logo512.png"} className='user-icon' />
                         <div className='article-creation-info'>
                           <h6 className='text-sm text-primary'>{article.author.username}</h6>
                           <time className='text-xsm text-secondary'>{

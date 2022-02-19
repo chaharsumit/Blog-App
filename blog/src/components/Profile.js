@@ -4,6 +4,7 @@ import { useState } from "react";
 import { articlesURL, ROOT_URL } from "../utils/constant";
 import { profileURL } from "../utils/constant";
 import { getToken } from "../utils/storage";
+import Loader from './Loader';
 
 
 export default function Profile(props) {
@@ -101,12 +102,12 @@ export default function Profile(props) {
   }
 
   return (
-    !userProfile ? 'Loading' : (
+    !userProfile ? (<Loader />) : (
     <>
       <section className="profile-hero">
         <div className="container flex">
           <div className="profile-info flex">
-            <img src={userProfile ? userProfile.image : 'logo512.png'} className="profile-image" />
+            <img src={userProfile ? userProfile.image : 'avatar.png'} className="profile-image" />
             <h3>{userProfile ? params.username : props.user.username}</h3>
             <p>{userProfile ? userProfile.bio : props.user.bio}</p>
           </div>
