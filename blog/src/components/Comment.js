@@ -15,11 +15,11 @@ export default function Comment(props){
   function fetchComments(){
     fetch(props.baseUrl + '/' + article.slug + '/comments').then(res => res.json()).then(comments => setComment({
       comments
-    }));
+    }))
   }
 
 
-  function postComment(){
+  async function postComment(){
     fetch(ROOT_URL + `articles/${props.article.article.article.slug}/comments`, {
       method: "POST",
       headers: {
@@ -32,8 +32,12 @@ export default function Comment(props){
         }
       })
     })
-      .then(res => res.json())
-      .then(() => fetchComments());
+      .then(() => {
+        setBody(null)
+      })
+      .then(() => {
+        fetchComments()
+      })
   }
 
   function handleComment(event){
@@ -65,7 +69,7 @@ export default function Comment(props){
       return (
         <>
           {
-            props.user ? <CommentForm handleChange={handleChange} handleComment={handleComment} />  : <p><Link to='/signup' className='text-danger'>Sign up</Link> or <Link to='/login' className="text-danger">Sign in</Link> to add comments to this article</p>
+            props.user ? <CommentForm handleChange={handleChange} body={body} handleComment={handleComment} />  : <p><Link to='/signup' className='text-danger'>Sign up</Link> or <Link to='/login' className="text-danger">Sign in</Link> to add comments to this article</p>
           }
           <ul className='comment-cards-list flex'>
             {
@@ -103,7 +107,7 @@ export default function Comment(props){
 function CommentForm(props){
   return (
     <form onSubmit={props.handleComment} className="comment-form flex">
-      <textarea onChange={props.handleChange} value={props.body} name='body' type='text' placeholder='Add Comment' className="comment-textarea form-control"  />
+      <textarea onChange={props.handleChange} value={props.body ? props.body : ''} name='body' type='text' placeholder='Add Comment' className="comment-textarea form-control"  />
       <fieldset className="comment-fieldset flex">
         <input type='submit' value='Post Comment' className="comment-submit" />
       </fieldset>

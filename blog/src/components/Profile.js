@@ -139,15 +139,22 @@ export default function Profile(props) {
                       <div className="user-info flex">
                         <img src={article.author.image} className='user-icon' />
                         <div className='article-creation-info'>
-                          <h6 className='text-sm text-primary'>{article.author.username}</h6>
+                          <h6 className='text-sm text-primary'>
+                            <Link to={`/profiles/${article.author.username}`} className='text-sm text-primary site-link'>
+                              {article.author.username}
+                            </Link>
+                          </h6>
                           <time className='text-xsm text-secondary'>{
                             props.getDate(article.createdAt)
                           }
                           </time>
+                          <button className='favourite-count'>💚 {article.favoritesCount}</button>
                         </div>
                       </div>
                       <div className="article-info">
-                        <h3 className='text-md text-bold text-primary'>{article.title}</h3>
+                        <Link to={`/articles/${article.slug}`} className='site-link'>
+                          <h3 className='text-md text-bold text-primary'>{article.title}</h3>
+                        </Link>
                         <p className='text-sm text-secondary'>{article.description}</p>
                       </div>
                       <div className="read-info flex">
