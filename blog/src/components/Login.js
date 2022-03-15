@@ -51,6 +51,7 @@ export default class Login extends React.Component {
         break;
       case "password":
         errors.password = this.validatePassword(value);
+        break;
       default:
         break;
     }

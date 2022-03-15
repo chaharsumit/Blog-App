@@ -7,7 +7,7 @@ export default function ArticleHero(props){
       <div className="container">
         <h1 className="text-xlg align-left">{article.article.title}</h1>
         <div className="user-info flex">
-          <img src={article.article.author.image ? article.article.author.image : "logo512.png"} className='user-icon' />
+          <img src={article.article.author.image ? article.article.author.image : "logo512.png"} className='user-icon' alt="author" />
           <div className='article-creation-info'>
             <h6 className='align-left'>
               <Link className='text-sm text-light site-link' to={`/profiles/${article.article.author.username}`}>

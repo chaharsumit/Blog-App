@@ -132,6 +132,7 @@ function UnauthenticatedApp(props) {
           path="/articles/:slug"
           element={<SingleArticle user={props.user} baseUrl={baseUrl} getDate={props.getDate} />}
         />
+        <Route path='/profiles/:username' element={<Profile user={props.user} getDate={props.getDate} />} />
       </Routes>
     </>
   );

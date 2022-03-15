@@ -107,7 +107,7 @@ export default function Profile(props) {
       <section className="profile-hero">
         <div className="container flex">
           <div className="profile-info flex">
-            <img src={userProfile ? userProfile.image : 'avatar.png'} className="profile-image" />
+            <img src={userProfile ? userProfile.image : 'avatar.png'} className="profile-image" alt="user" />
             <h3>{userProfile ? params.username : props.user.username}</h3>
             <p>{userProfile ? userProfile.bio : props.user.bio}</p>
           </div>
@@ -137,7 +137,7 @@ export default function Profile(props) {
                   articles.articles.map(article => (
                     <article key={article.slug} className="article-card flex">
                       <div className="user-info flex">
-                        <img src={article.author.image} className='user-icon' />
+                        <img src={article.author.image} className='user-icon' alt="author" />
                         <div className='article-creation-info'>
                           <h6 className='text-sm text-primary'>
                             <Link to={`/profiles/${article.author.username}`} className='text-sm text-primary site-link'>

@@ -3,21 +3,18 @@ import {Link} from 'react-router-dom';
 import FeedNav from './FeedNav';
 
 export default class Articles extends React.Component{
-  constructor(props){
-    super(props);
-  }
-
-
   render(){
+    console.log(this.props.articles);
       return (
         <section className="articles-container">
           <div className="container flex">
             <FeedNav user={this.props.user} activeFeed={this.props.activeFeed} clearTagAndFeed={this.props.clearTagAndFeed} clearTag={this.props.clearTag} selectedTag={this.props.selectedTag} />
             {
+              this.props.articles.length === 0 ? 'No articles in your feed yet...' :
               this.props.articles?.map(article => (
                 <article key={article.slug} className="article-card flex">
                   <div className="user-info flex">
-                    <img src={article.author.image ? article.author.image : 'logo512.png'} className='user-icon' />
+                    <img src={article.author.image ? article.author.image : 'logo512.png'} className='user-icon' alt="author" />
                     <div className='article-creation-info'>
                       <h6>
                         <Link to={`/profiles/${article.author.username}`} className='text-sm text-primary site-link'>

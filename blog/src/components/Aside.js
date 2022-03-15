@@ -1,5 +1,4 @@
 import React from "react";
-import Loader from "./Loader";
 import { tagsURL } from "../utils/constant";
 export default class Aside extends React.Component {
   constructor(props) {

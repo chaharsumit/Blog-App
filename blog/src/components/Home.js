@@ -6,7 +6,6 @@ import Loader from "./Loader";
 import Pagination from "./Pagination";
 import { articlesURL } from "../utils/constant";
 import { getToken } from "../utils/storage";
-import { ROOT_URL } from "../utils/constant";
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -133,11 +132,15 @@ export default class Home extends React.Component {
             />
             <Aside handleTagSelect={this.handleTagSelect} />
           </div>
-          <Pagination
-            articlesCount={this.state.articlesCount}
-            handlePagination={this.handlePagination}
-            activePageIndex={this.state.activePageIndex}
-          />
+          {
+            !this.state.articles || this.state.articles.length === 0 ? '' : (
+              <Pagination
+                articlesCount={this.state.articlesCount}
+                handlePagination={this.handlePagination}
+                activePageIndex={this.state.activePageIndex}
+              />
+            )
+          }
         </>
       );
     }

@@ -1,10 +1,6 @@
 import React from 'react';
 
 export default class Pagination extends React.Component{
-  constructor(props){
-    super(props);
-  }
-
   render(){
     let totalArticles = this.props.articlesCount;
     let noOfPages = Math.ceil(totalArticles / 10);
@@ -21,7 +17,7 @@ export default class Pagination extends React.Component{
           <ul className='pagination-menu flex'>
             {
               pageArr.map(page => (
-                <li key={page} onClick={() => this.props.handlePagination(page)} className={this.props.activePageIndex != page ? 'pagination-menu-item' : 'pagination-menu-item active-page-menu-item'}>{page}</li>
+                <li key={page} onClick={() => this.props.handlePagination(page)} className={this.props.activePageIndex !== page ? 'pagination-menu-item' : 'pagination-menu-item active-page-menu-item'}>{page}</li>
               ))
             }
           </ul>

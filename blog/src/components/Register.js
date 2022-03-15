@@ -51,9 +51,10 @@ export default class Register extends React.Component {
         break;
       case "password":
         errors.password = this.validatePassword(value);
+        break;
       case "username":
-        errors.username =
-          value.length < 6 ? "Username should have more than 6 characters" : "";
+        errors.username = value.length < 6 ? "Username should have more than 6 characters" : "";
+        break;
       default:
         break;
     }

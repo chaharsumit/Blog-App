@@ -28,7 +28,6 @@ export default class Compose extends React.Component {
     let title = this.state.title;
     let description = this.state.description;
     let body = this.state.body;
-    let tagList = this.state.tagList;
     fetch(composeURL, {
       method: "POST",
       headers: {

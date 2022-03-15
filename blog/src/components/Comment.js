@@ -10,7 +10,7 @@ export default function Comment(props){
 
   useEffect(() => {
     fetchComments();
-  },[]);
+  }, []);
 
   function fetchComments(){
     fetch(props.baseUrl + '/' + article.slug + '/comments').then(res => res.json()).then(comments => setComment({
@@ -33,10 +33,8 @@ export default function Comment(props){
       })
     })
       .then(() => {
-        setBody(null)
-      })
-      .then(() => {
-        fetchComments()
+        setBody(null);
+        fetchComments();
       })
   }
 
@@ -77,7 +75,7 @@ export default function Comment(props){
                 <li key={comment.id} className='comment-card'>
                   <p className='text-xsm comment-description'>{comment.body}</p>
                   <div className='comment-author-info flex'>
-                    <img src={comment.author.image ? comment.author.image : "logo512.png"} className='user-icon-sm' />
+                    <img src={comment.author.image ? comment.author.image : "logo512.png"} className='user-icon-sm' alt="author" />
                     <p className='text-xsm text-light'>{comment.author.username}</p>
                     <time className='text-xsm text-light'>{props.getDate(comment.createdAt)}</time>
                     {

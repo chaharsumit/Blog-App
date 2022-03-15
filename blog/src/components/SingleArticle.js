@@ -5,14 +5,13 @@ import Comment from "./Comment";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Loader from "./Loader";
-import { ROOT_URL, userURL } from "../utils/constant";
+import { ROOT_URL } from "../utils/constant";
 import { getToken } from "../utils/storage";
 
 ///api/articles/:slug/favorite
 
 export default function SingleArticle(props) {
   const [article, setArticle] = useState(null);
-  const [profile, setProfile] = useState(null);
   let slug = useParams().slug;
 
   const navigate = useNavigate();
@@ -94,7 +93,6 @@ export default function SingleArticle(props) {
             getDate={props.getDate}
             unfavouriteArticle={unfavouriteArticle}
             favouriteArticle={favouriteArticle}
-            profile={profile}
           />
           <ArticleBody article={article} />
           <Comment

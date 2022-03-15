@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { articlesURL } from "../utils/constant";
 
@@ -8,8 +8,6 @@ import { articlesURL } from "../utils/constant";
 export default function CurrUserProfile(props) {
   const [activeTab, setTab] = useState("author");
   const [articles, setArticles] = useState(null);
-
-  let params = useParams();
 
   useEffect(() => {
     getCurrUserArticles();
@@ -60,7 +58,7 @@ export default function CurrUserProfile(props) {
       <section className="profile-hero">
         <div className="container flex">
           <div className="profile-info flex">
-            <img src={props.user.image ? props.user.image : "logo512.png"} className="profile-image" />
+            <img src={props.user.image ? props.user.image : "logo512.png"} className="profile-image" alt="user" />
             <h3>
               <Link to='/profile' className="text-sm site-link text-light">
                 {props.user.username}
@@ -93,7 +91,7 @@ export default function CurrUserProfile(props) {
                   articles.articles.map(article => (
                     <article key={article.slug} className="article-card flex">
                       <div className="user-info flex">
-                        <img src={article.author.image ? article.author.image : "logo512.png"} className='user-icon' />
+                        <img src={article.author.image ? article.author.image : "logo512.png"} className='user-icon' alt="author" />
                         <div className='article-creation-info'>
                           <h6 className='text-sm text-primary'>
                             <Link to={`/profiles/${article.author.username}`} className='text-sm text-primary site-link'>

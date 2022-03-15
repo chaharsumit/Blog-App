@@ -1,7 +1,6 @@
 import React from "react";
 import { updateUserURL } from "../utils/constant";
 import { getToken } from "../utils/storage";
-import { Navigate } from "react-router-dom";
 export default class Settings extends React.Component {
   constructor(props) {
     super(props);
@@ -95,9 +94,10 @@ export default class Settings extends React.Component {
         break;
       case "password":
         errors.password = this.validatePassword(value);
+        break;
       case "username":
-        errors.username =
-          value.length < 6 ? "Username should have more than 6 characters" : "";
+        errors.username = value.length < 6 ? "Username should have more than 6 characters" : "";
+        break;
       default:
         break;
     }

@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-
-import { composeURL } from "../utils/constant";
 import { getToken } from "../utils/storage";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
