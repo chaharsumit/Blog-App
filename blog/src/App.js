@@ -11,9 +11,9 @@ import Settings from "./components/Settings";
 import Profile from "./components/Profile";
 import Compose from "./components/Compose";
 import CurrUserProfile from "./components/CurrUserProfile";
-import EditArticle from './components/EditArticle';
+import EditArticle from "./components/EditArticle";
 
-let baseUrl = "https://mighty-oasis-08080.herokuapp.com/api/articles";
+let baseUrl = "https://api.realworld.io/api/articles";
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -130,9 +130,18 @@ function UnauthenticatedApp(props) {
         />
         <Route
           path="/articles/:slug"
-          element={<SingleArticle user={props.user} baseUrl={baseUrl} getDate={props.getDate} />}
+          element={
+            <SingleArticle
+              user={props.user}
+              baseUrl={baseUrl}
+              getDate={props.getDate}
+            />
+          }
         />
-        <Route path='/profiles/:username' element={<Profile user={props.user} getDate={props.getDate} />} />
+        <Route
+          path="/profiles/:username"
+          element={<Profile user={props.user} getDate={props.getDate} />}
+        />
       </Routes>
     </>
   );
@@ -147,18 +156,36 @@ function AuthenticatedApp(props) {
           element={<Home getDate={props.getDate} user={props.user} />}
         />
         <Route path="/settings" element={<Settings />} />
-        <Route path="/profile" element={<CurrUserProfile user={props.user} getDate={props.getDate} />} />
-        <Route path='/profiles/:username' element={<Profile user={props.user} getDate={props.getDate} />} />
         <Route
-          path="/compose"
-          element={<Compose user={props.user} />} />
+          path="/profile"
+          element={
+            <CurrUserProfile user={props.user} getDate={props.getDate} />
+          }
+        />
+        <Route
+          path="/profiles/:username"
+          element={<Profile user={props.user} getDate={props.getDate} />}
+        />
+        <Route path="/compose" element={<Compose user={props.user} />} />
         <Route
           path="/articles/:slug"
-          element={<SingleArticle baseUrl={baseUrl} user={props.user} getDate={props.getDate} />}
+          element={
+            <SingleArticle
+              baseUrl={baseUrl}
+              user={props.user}
+              getDate={props.getDate}
+            />
+          }
         />
         <Route
           path="/articles/editor/:slug"
-          element={<EditArticle baseUrl={baseUrl} user={props.user} getDate={props.getDate} />}
+          element={
+            <EditArticle
+              baseUrl={baseUrl}
+              user={props.user}
+              getDate={props.getDate}
+            />
+          }
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
